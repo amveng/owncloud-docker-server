@@ -17,7 +17,7 @@ class String
   end
 end
 
-chunk_size = (2**20) * 1
+chunk_size = (2**20) * 10
 user = 'admin'
 pass = 'admin'
 folder = (0..16).to_a.map { rand(16).to_s(16) }.join
@@ -28,7 +28,7 @@ server_file_path = "http://127.0.0.1:8080/remote.php/dav/files/admin/#{file_name
 dav = Net::DAV.new('http://127.0.0.1:8080/remote.php/dav/uploads/admin/', curl: false)
 dav.verify_server = false
 dav.credentials(user, pass)
-if dav.exists?(path_server_file)
+if dav.exists?(server_file_path)
   puts 'The file is already on the server !'
   exit
 end
@@ -59,7 +59,7 @@ File.open(file_local_path, 'rb') do |stream|
     number_chank += 1
   end
 end
-dav.move("#{folder}/.file", path_server_file)
+dav.move("#{folder}/.file", server_file_path)
 head = "`curl --silent -I -u admin:admin #{server_file_path}`".eval
 checksum = Digest::SHA1.hexdigest(File.read(file_local_path))
 if !head.include?(checksum) || upload_error
