@@ -1,0 +1,20 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    mini_portile2 (2.4.0)
+    net_dav (0.5.1)
+      nokogiri
+    nokogiri (1.10.10)
+      mini_portile2 (~> 2.4.0)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  net_dav
+
+RUBY VERSION
+   ruby 2.7.0p0
+
+BUNDLED WITH
+   2.1.4
